@@ -1,0 +1,21 @@
+= Cypher DSL Examples
+
+This repository puts together a few examples using the https://github.com/neo4j/cypher-dsl/[Cypher DSL^] library, which allows you to programmatically construct Cypher queries to run against Neo4j.
+
+== Setup/Config
+
+1. Neo4j database - you will need a Neo4j database instance. I would recommend spinning up a free-tier instance of https://dev.neo4j.com/aura-java[Neo4j Aura^] (cloud database-as-a-service).
+
+2. Data loaded to Neo4j - to execute the scripts using my data set, copy/paste the https://github.com/JMHReif/graph-demo-datasets/blob/main/coffee-shop/load-data.cypher[Coffee Shop data script^] and execute it.
+
+3. Set environment variables - need to set database connection in this repository, so scripts can access your instance. Open the `env_example.sh` file and place your credentials in the appropriate variables. Then run `source ./env_example.sh` at the command line. You can verify the values are as expected by running `env` in your terminal.
+
+4. Execute examples - run each example JBang script using the command `jbang <filename>.java`. Results should output to the console!
+
+Happy coding!
+
+== Resources
+
+* Code: https://github.com/neo4j/cypher-dsl/[Cypher DSL^]
+* Docs: https://neo4j.github.io/cypher-dsl/[Cypher DSL documentation^]
+* API: https://neo4j.github.io/cypher-dsl/2024.4.0/project-info/apidocs/org.neo4j.cypherdsl.core/module-summary.html[Cypher DSL API docs^]

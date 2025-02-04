@@ -1,0 +1,8 @@
+### VS Code ###
+.vscode/
+
+### IntelliJ IDEA ###
+*.iml
+
+### Environment variable script ###
+env.sh
