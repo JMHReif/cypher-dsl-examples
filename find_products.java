@@ -26,11 +26,14 @@ public class find_products {
 		var driver = GraphDatabase.driver(uri, AuthTokens.basic(username, password));
 
 		// find products
-		var products = Cypher.node("Product").named("p");
+		var products = Cypher.node("Product").named("p"); //(p:Product)
 		var query = Cypher.match(products)
 						.returning(products.property("productId"),
 									products.property("productName"))
 						.build();
+		//Cypher equivalent:
+			// MATCH (p:Product)
+			// RETURN p.productId, p.productName;
 
 		try (driver) {
 			try (var session = driver.session()) {

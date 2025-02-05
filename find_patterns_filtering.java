@@ -27,18 +27,24 @@ public class find_patterns_filtering {
 
 		// find orders containing > 2 lattes
 		var product = Cypher.node("Product").named("p")
-						.withProperties("productName", Cypher.literalOf("Latte"));
-		var orders = Cypher.node("Order").named("o");
-		var containsRel = product.relationshipFrom(orders, "CONTAINS").named("rel");
-		var quantity = containsRel.property("quantity");
+						.withProperties("productName", Cypher.literalOf("Latte")); //(p:Product {productName: "Latte"})
+		var orders = Cypher.node("Order").named("o"); //(o:Order)
+		var containsRel = product.relationshipFrom(orders, "CONTAINS").named("rel"); //(p)-[rel:CONTAINS]-(o)
+		var quantity = containsRel.property("quantity"); //rel.quantity
 		var query = Cypher.match(containsRel)
-						.where(containsRel.property("quantity").gt(Cypher.literalOf(2)))
+						.where(quantity.gt(Cypher.literalOf(2)))
 						.returning(orders.property("transactionId"),
 									product.property("productName"),
 									quantity)
 						.orderBy(quantity.descending())
 						.limit(10)
 						.build();
+		//Cypher equivalent:
+			// MATCH (p:Product {productName: "Latte"})<-[rel:CONTAINS]-(o:Order)
+			// WHERE rel.quantity > 2
+			// RETURN o.transactionId, p.productName, rel.quantity AS quantity
+			// ORDER BY quantity DESC
+			// LIMIT 10;
 
 		try (driver) {
 			try (var session = driver.session()) {

@@ -27,15 +27,18 @@ public class find_patterns {
 
 		// find products in coffee category
 		var category = Cypher.node("Category").named("c")
-						.withProperties("category", Cypher.literalOf("Coffee"));
-		var types = Cypher.node("Type").named("t");
-		var products = Cypher.node("Product").named("p");
+						.withProperties("category", Cypher.literalOf("Coffee")); //(c:Category {category: "Coffee"})
+		var types = Cypher.node("Type").named("t"); //(t:Type)
+		var products = Cypher.node("Product").named("p"); //(p:Product)
 		var query = Cypher.match(products
 							.relationshipTo(types, "SORTED_BY")
 							.relationshipTo(category, "ORGANIZED_IN"))
 						.returning(products.property("productId"),
 									products.property("productName"))
 						.build();
+		//Cypher equivalent:
+			// MATCH (c:Category {category: "Coffee"})<-[rel:ORGANIZED_IN]-(t:Type)<-[rel2:SORTED_BY]-(p:Product)
+			// RETURN p.productId, p.productName;
 
 		try (driver) {
 			try (var session = driver.session()) {

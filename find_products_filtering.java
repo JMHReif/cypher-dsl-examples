@@ -26,12 +26,14 @@ public class find_products_filtering {
 		var driver = GraphDatabase.driver(uri, AuthTokens.basic(username, password));
 
 		// find products with filtering
-		// LEFT OFF HERE!
 		var coffee = Cypher.node("Product").named("p")
-						.withProperties("productName", Cypher.literalOf("Columbian Medium Roast Sm"));
+						.withProperties("productName", Cypher.literalOf("Columbian Medium Roast Sm")); //(p:Product {productName: "Columbian Medium Roast Sm"})
 		var query = Cypher.match(coffee)
 						.returning(coffee.project(Cypher.asterisk()))
 						.build();
+		//Cypher equivalent:
+			// MATCH (p:Product {productName: "Columbian Medium Roast Sm"})
+			// RETURN p{.*};
 
 		try (driver) {
 			try (var session = driver.session()) {
