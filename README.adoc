@@ -19,3 +19,4 @@ Happy coding!
 * Code: https://github.com/neo4j/cypher-dsl/[Cypher DSL^]
 * Docs: https://neo4j.github.io/cypher-dsl/[Cypher DSL documentation^]
 * API: https://neo4j.github.io/cypher-dsl/2024.4.0/project-info/apidocs/org.neo4j.cypherdsl.core/module-summary.html[Cypher DSL API docs^]
+* Examples: https://github.com/neo4j/cypher-dsl/blob/main/neo4j-cypher-dsl-examples/neo4j-cypher-dsl-examples-core/src/test/java/org/neo4j/cypherdsl/examples/core/CypherDSLExamplesTest.java[Cypher DSL Test Examples^]

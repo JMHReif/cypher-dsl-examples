@@ -15,7 +15,7 @@ import org.neo4j.driver.Logging;
 import org.neo4j.cypherdsl.core.Cypher;
 import org.neo4j.cypherdsl.core.renderer.Renderer;
 
-public class find_patterns {
+public class find_products {
 
 	private static final String uri = System.getenv("NEO4J_URI");
 	private static final String username = System.getenv("NEO4J_USERNAME");
@@ -25,14 +25,9 @@ public class find_patterns {
 	public static void main(String... args) {
 		var driver = GraphDatabase.driver(uri, AuthTokens.basic(username, password));
 
-		// find products in coffee category
-		var category = Cypher.node("Category").named("c")
-						.withProperties("category", Cypher.literalOf("Coffee"));
-		var types = Cypher.node("Type").named("t");
+		// find products
 		var products = Cypher.node("Product").named("p");
-		var query = Cypher.match(products
-							.relationshipTo(types, "SORTED_BY")
-							.relationshipTo(category, "ORGANIZED_IN"))
+		var query = Cypher.match(products)
 						.returning(products.property("productId"),
 									products.property("productName"))
 						.build();
